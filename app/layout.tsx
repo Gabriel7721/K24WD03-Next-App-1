@@ -28,7 +28,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
       </body>
-      <button className="btn btn-primary">Check DaisyUI</button>
+      {/* <button className="btn btn-primary">Check DaisyUI</button> */}
     </html>
   );
 }
