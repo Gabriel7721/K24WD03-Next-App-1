@@ -5,15 +5,15 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: "/users/static",
+        source: "/users/test-rendering/static",
         headers: [{ key: "refresh", value: "5" }],
       },
       {
-        source: "/users/dynamic",
+        source: "/users/test-rendering/dynamic",
         headers: [{ key: "refresh", value: "1" }],
       },
       {
-        source: "/users/isr",
+        source: "/users/test-rendering/isr",
         headers: [{ key: "refresh", value: "5" }],
       },
     ];
