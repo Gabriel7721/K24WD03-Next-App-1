@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { sort } from "fast-sort";
 
 interface User {
   id: number;
