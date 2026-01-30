@@ -3,6 +3,8 @@ import styles from "./ProductList.module.css";
 interface Product {
   id: number;
   title: string;
+  description: string;
+  category: string;
   price: number;
 }
 
@@ -19,24 +21,30 @@ const ProductList = async () => {
     <main>
       <h1>Product List</h1>
 
-      <table>
-        <thead>
-          <tr>
-            <th className={styles.tbl}>ID</th>
-            <th className={styles.tbl}>Title</th>
-            <th className={styles.tbl}>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products.map((p) => (
-            <tr className={styles.tr} key={p.id}>
-              <td className={styles.tbl}>{p.id}</td>
-              <td className={styles.tbl}>{p.title}</td>
-              <td className={styles.tbl}>{p.price}</td>
+      <div className="overflow-x-auto h-96 w-96">
+        <table className="table table-xs table-pin-rows table-pin-cols">
+          <thead>
+            <tr>
+              <th className={styles.tbl}>ID</th>
+              <th className={styles.tbl}>Title</th>
+              <th className={styles.tbl}>Description</th>
+              <th className={styles.tbl}>Category</th>
+              <th className={styles.tbl}>Price</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {products.map((p) => (
+              <tr className={styles.tr} key={p.id}>
+                <td className={styles.tbl}>{p.id}</td>
+                <td className={styles.tbl}>{p.title}</td>
+                <td className={styles.tbl}>{p.description}</td>
+                <td className={styles.tbl}>{p.category}</td>
+                <td className={styles.tbl}>{p.price}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </main>
   );
 };
