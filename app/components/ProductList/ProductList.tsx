@@ -21,7 +21,7 @@ const ProductList = async () => {
     <main>
       <h1>Product List</h1>
 
-      <div className="overflow-x-auto h-96 w-96">
+      <div className="overflow-x-auto h-96 w-200">
         <table className="table table-xs table-pin-rows table-pin-cols">
           <thead>
             <tr>

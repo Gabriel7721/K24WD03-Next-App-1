@@ -3,7 +3,7 @@
 const AddToCart = () => {
   return (
     <div>
-      <button
+      <button className="btn btn-warning"
         onClick={() => {
           alert("Product has been added to cart successfully!");
         }}>
