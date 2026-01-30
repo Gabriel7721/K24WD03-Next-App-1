@@ -1,3 +1,5 @@
+import styles from "./ProductList.module.css";
+
 interface Product {
   id: number;
   title: string;
@@ -20,17 +22,17 @@ const ProductList = async () => {
       <table>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Price</th>
+            <th className={styles.tbl}>ID</th>
+            <th className={styles.tbl}>Title</th>
+            <th className={styles.tbl}>Price</th>
           </tr>
         </thead>
         <tbody>
           {products.map((p) => (
-            <tr key={p.id}>
-              <td>{p.id}</td>
-              <td>{p.title}</td>
-              <td>{p.price}</td>
+            <tr className={styles.tr} key={p.id}>
+              <td className={styles.tbl}>{p.id}</td>
+              <td className={styles.tbl}>{p.title}</td>
+              <td className={styles.tbl}>{p.price}</td>
             </tr>
           ))}
         </tbody>
