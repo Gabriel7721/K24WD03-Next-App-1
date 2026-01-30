@@ -32,7 +32,13 @@ const UsersPage = async ({ searchParams }: Props) => {
       <p>{new Date().toLocaleTimeString()}</p>
       <Link href="/">Go to home page</Link>
 
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense
+        fallback={
+          <>
+            <div className="loading loading-infinity loading-xl"></div>
+            <p>Vui lòng chờ chút nhé...</p>
+          </>
+        }>
         <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
           <table className="table">
             <thead>
