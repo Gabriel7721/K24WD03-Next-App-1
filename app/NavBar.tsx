@@ -2,10 +2,12 @@ import Link from "next/link";
 
 const NavBar = () => {
   return (
-    <>
-      <Link href={"/"}>Home</Link>
+    <div className="bg-gray-200 flex p-5">
+      <Link className="mr-5" href={"/"}>
+        Home
+      </Link>
       <Link href={"/users"}>Users</Link>
-    </>
+    </div>
   );
 };
 
