@@ -25,6 +25,9 @@ const UsersPage = async ({ searchParams }: Props) => {
   return (
     <main>
       <h1>Users Page</h1>
+      <Link href={"/users/new"} className="btn btn-danger">
+        Create new user
+      </Link>
       <p>{new Date().toLocaleTimeString()}</p>
       <Link href="/">Go to home page</Link>
 
