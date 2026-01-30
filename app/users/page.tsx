@@ -16,24 +16,26 @@ const UsersPage = async () => {
       <h1>Users Page</h1>
       <p>{new Date().toLocaleTimeString()}</p>
       <Link href="/">Go to home page</Link>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user) => (
-            <tr key={user.id}>
-              <th>{user.id}</th>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
+      <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+        <table className="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {users.map((user) => (
+              <tr key={user.id}>
+                <th>{user.id}</th>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </main>
   );
 };
