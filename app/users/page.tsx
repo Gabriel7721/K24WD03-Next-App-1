@@ -7,11 +7,21 @@ interface User {
   email: string;
 }
 
-const UsersPage = async () => {
+interface Props {
+  searchParams: Promise<{ sortOrder: string }>;
+}
+
+const UsersPage = async ({ searchParams }: Props) => {
   const res = await fetch("https://jsonplaceholder.typicode.com/users", {
     next: { revalidate: 5 },
   });
+  const { sortOrder } = await searchParams;
   const users: User[] = await res.json();
+
+  const sortedUsers = sort(users).asc(
+    sortOrder === "email" ? (user) => user.email : (user) => user.name,
+  );
+
   return (
     <main>
       <h1>Users Page</h1>
@@ -32,7 +42,7 @@ const UsersPage = async () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
+            {sortedUsers.map((user) => (
               <tr key={user.id}>
                 <th>{user.id}</th>
                 <td>{user.name}</td>
