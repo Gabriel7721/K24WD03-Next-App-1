@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { sort } from "fast-sort";
+import { Suspense } from "react";
 
 interface User {
   id: number;
@@ -31,30 +32,32 @@ const UsersPage = async ({ searchParams }: Props) => {
       <p>{new Date().toLocaleTimeString()}</p>
       <Link href="/">Go to home page</Link>
 
-      <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
-        <table className="table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>
-                <Link href={"/users?sortOrder=name"}>Name</Link>
-              </th>
-              <th>
-                <Link href={"/users?sortOrder=email"}>Email</Link>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {sortedUsers.map((user) => (
-              <tr key={user.id}>
-                <th>{user.id}</th>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
+      <Suspense fallback={<div>Loading...</div>}>
+        <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+          <table className="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>
+                  <Link href={"/users?sortOrder=name"}>Name</Link>
+                </th>
+                <th>
+                  <Link href={"/users?sortOrder=email"}>Email</Link>
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {sortedUsers.map((user) => (
+                <tr key={user.id}>
+                  <th>{user.id}</th>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Suspense>
     </main>
   );
 };
