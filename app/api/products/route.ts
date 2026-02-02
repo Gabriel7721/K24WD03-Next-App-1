@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
 
   const validData = validation.data;
 
-  const name = await prisma.user.findUnique({
+  const name = await prisma.product.findUnique({
     where: { name: validData.name },
   });
 
@@ -26,12 +26,12 @@ export async function POST(request: NextRequest) {
       { status: 400 },
     );
 
-  const newUser = await prisma.user.create({
+  const newProduct = await prisma.product.create({
     data: {
       name: validData.name,
       price: validData.price,
     },
   });
 
-  return NextResponse.json(newUser, { status: 201 });
+  return NextResponse.json(newProduct, { status: 201 });
 }
