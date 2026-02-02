@@ -6,3 +6,8 @@ export function GET(request: NextRequest) {
     { id: 2, name: "Paris" },
   ]);
 }
+
+export async function POST(request: NextRequest) {
+  const body = await request.json();
+  return NextResponse.json(body);
+}
