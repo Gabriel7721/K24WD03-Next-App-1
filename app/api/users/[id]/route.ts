@@ -55,6 +55,10 @@ export async function DELETE(request: NextRequest, { params }: Props) {
     return NextResponse.json({ message: "User Not Found" });
   }
 
+  await prisma.user.delete({
+    where: { id: parseInt(id) },
+  });
+
   return new NextResponse(null, { status: 204 });
 }
 
