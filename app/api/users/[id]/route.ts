@@ -33,25 +33,16 @@ export async function PUT(request: NextRequest, { params }: Props) {
   if (!validation.success)
     return NextResponse.json(validation.error.issues, { status: 400 });
   const validData = validation.data;
-  
-  const email = await prisma.user.findUnique({
-    where: { email: validData.email },
-  });
 
-  if (email)
-    return NextResponse.json(
-      { error: "Email already existed" },
-      { status: 400 },
-    );
-
-  const newUser = await prisma.user.create({
+  const updateUser = await prisma.user.update({
+    where: { id: parseInt(id) },
     data: {
       name: validData.name,
       email: validData.email,
     },
   });
 
-  return NextResponse.json({ id: 3, name: validData.name });
+  return NextResponse.json(updateUser, { status: 200 });
 }
 
 export async function DELETE(request: NextRequest, { params }: Props) {
@@ -65,4 +56,31 @@ export async function DELETE(request: NextRequest, { params }: Props) {
   }
 
   return new NextResponse(null, { status: 204 });
+}
+
+export async function PATCH(request: NextRequest, { params }: Props) {
+  const { id } = await params;
+  const user = await prisma.user.findUnique({
+    where: { id: parseInt(id) },
+  });
+
+  if (!user) {
+    return NextResponse.json({ message: "User Not Found" });
+  }
+  const body = await request.json();
+
+  const validation = schema.safeParse(body);
+  if (!validation.success)
+    return NextResponse.json(validation.error.issues, { status: 400 });
+  const validData = validation.data;
+
+  const updateUser = await prisma.user.update({
+    where: { id: parseInt(id) },
+    data: {
+      name: validData.name || user.name,
+      email: validData.email || user.email,
+    },
+  });
+
+  return NextResponse.json(updateUser, { status: 200 });
 }
