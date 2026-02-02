@@ -20,23 +20,13 @@ export async function PUT(request: NextRequest, { params }: Props) {
   if (id > 10) {
     return NextResponse.json({ message: "User Not Found" });
   }
-
   const body = await request.json();
 
   const validation = schema.safeParse(body);
-
   if (!validation.success)
     return NextResponse.json(validation.error.issues, { status: 400 });
 
-  //   if (typeof body.name !== "string" || body.name.trim().length === 0) {
-  //     return NextResponse.json(
-  //       { message: "Name must be string and cannot be empty" },
-  //       { status: 400 },
-  //     );
-  //   }
-
-  const validData = validation.data
-
+  const validData = validation.data;
   return NextResponse.json({ id: 3, name: validData.name });
 }
 
