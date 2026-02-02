@@ -12,3 +12,22 @@ export async function GET(request: NextRequest, { params }: Props) {
   }
   return NextResponse.json({ id: id, name: "Malaysia" });
 }
+
+export async function UPDATE(request: NextRequest, { params }: Props) {
+  const { id } = await params;
+
+  if (id > 10) {
+    return NextResponse.json({ message: "User Not Found" });
+  }
+
+  const body = await request.json();
+
+  if (typeof body.name !== "string" || body.name.trim().length === 0) {
+    return NextResponse.json(
+      { message: "Name must be string and cannot be empty" },
+      { status: 400 },
+    );
+  }
+
+  return NextResponse.json({ id: 3, name: body.name });
+}

@@ -9,5 +9,13 @@ export function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  return NextResponse.json(body);
+
+  if (typeof body.name !== "string" || body.name.trim().length === 0) {
+    return NextResponse.json(
+      { message: "Name must be string and cannot be empty" },
+      { status: 400 },
+    );
+  }
+
+  return NextResponse.json({ id: 3, name: body.name });
 }
