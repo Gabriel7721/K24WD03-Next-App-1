@@ -26,7 +26,7 @@ export async function PUT(request: NextRequest, { params }: Props) {
   const validation = schema.safeParse(body);
 
   if (!validation.success)
-    return NextResponse.json(validation, { status: 400 });
+    return NextResponse.json(validation.error.issues, { status: 400 });
 
   //   if (typeof body.name !== "string" || body.name.trim().length === 0) {
   //     return NextResponse.json(
@@ -35,7 +35,9 @@ export async function PUT(request: NextRequest, { params }: Props) {
   //     );
   //   }
 
-  return NextResponse.json({ id: 3, name: body.name });
+  const validData = validation.data
+
+  return NextResponse.json({ id: 3, name: validData.name });
 }
 
 export async function DELETE(request: NextRequest, { params }: Props) {
