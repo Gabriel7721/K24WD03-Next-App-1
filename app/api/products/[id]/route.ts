@@ -8,23 +8,23 @@ interface Props {
 
 export async function GET(request: NextRequest, { params }: Props) {
   const { id } = await params;
-  const user = await prisma.user.findUnique({
+  const product = await prisma.product.findUnique({
     where: { id: parseInt(id) },
   });
 
-  if (!user) {
+  if (!product) {
     return NextResponse.json({ message: "User Not Found" }, { status: 404 });
   }
-  return NextResponse.json(user);
+  return NextResponse.json(product);
 }
 
 export async function PUT(request: NextRequest, { params }: Props) {
   const { id } = await params;
-  const user = await prisma.user.findUnique({
+  const product = await prisma.product.findUnique({
     where: { id: parseInt(id) },
   });
 
-  if (!user) {
+  if (!product) {
     return NextResponse.json({ message: "User Not Found" });
   }
   const body = await request.json();
@@ -34,24 +34,24 @@ export async function PUT(request: NextRequest, { params }: Props) {
     return NextResponse.json(validation.error.issues, { status: 400 });
   const validData = validation.data;
 
-  const updateUser = await prisma.user.update({
+  const updateProduct = await prisma.product.update({
     where: { id: parseInt(id) },
     data: {
       name: validData.name,
-      email: validData.email,
+      price: validData.price,
     },
   });
 
-  return NextResponse.json(updateUser, { status: 200 });
+  return NextResponse.json(updateProduct, { status: 200 });
 }
 
 export async function DELETE(request: NextRequest, { params }: Props) {
   const { id } = await params;
-  const user = await prisma.user.findUnique({
+  const product = await prisma.product.findUnique({
     where: { id: parseInt(id) },
   });
 
-  if (!user) {
+  if (!product) {
     return NextResponse.json({ message: "User Not Found" });
   }
 
@@ -64,11 +64,11 @@ export async function DELETE(request: NextRequest, { params }: Props) {
 
 export async function PATCH(request: NextRequest, { params }: Props) {
   const { id } = await params;
-  const user = await prisma.user.findUnique({
+  const product = await prisma.product.findUnique({
     where: { id: parseInt(id) },
   });
 
-  if (!user) {
+  if (!product) {
     return NextResponse.json({ message: "User Not Found" });
   }
   const body = await request.json();
@@ -78,13 +78,13 @@ export async function PATCH(request: NextRequest, { params }: Props) {
     return NextResponse.json(validation.error.issues, { status: 400 });
   const validData = validation.data;
 
-  const updateUser = await prisma.user.update({
+  const updateProduct = await prisma.product.update({
     where: { id: parseInt(id) },
     data: {
-      name: validData.name || user.name,
-      email: validData.email || user.email,
+      name: validData.name || product.name,
+      price: validData.price || product.price,
     },
   });
 
-  return NextResponse.json(updateUser, { status: 200 });
+  return NextResponse.json(updateProduct, { status: 200 });
 }

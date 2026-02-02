@@ -3,8 +3,8 @@ import { schema } from "./scheme";
 import { prisma } from "@/prisma/lib/prisma";
 
 export async function GET(request: NextRequest) {
-  const users = await prisma.user.findMany();
-  return NextResponse.json(users);
+  const products = await prisma.product.findMany();
+  return NextResponse.json(products);
 }
 
 export async function POST(request: NextRequest) {
@@ -16,20 +16,20 @@ export async function POST(request: NextRequest) {
 
   const validData = validation.data;
 
-  const email = await prisma.user.findUnique({
-    where: { email: validData.email },
+  const name = await prisma.user.findUnique({
+    where: { name: validData.name },
   });
 
-  if (email)
+  if (name)
     return NextResponse.json(
-      { error: "Email already existed" },
+      { error: "Name already existed" },
       { status: 400 },
     );
 
   const newUser = await prisma.user.create({
     data: {
       name: validData.name,
-      email: validData.email,
+      price: validData.price,
     },
   });
 
