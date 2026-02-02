@@ -13,7 +13,7 @@ export async function GET(request: NextRequest, { params }: Props) {
   return NextResponse.json({ id: id, name: "Malaysia" });
 }
 
-export async function UPDATE(request: NextRequest, { params }: Props) {
+export async function PUT(request: NextRequest, { params }: Props) {
   const { id } = await params;
 
   if (id > 10) {
